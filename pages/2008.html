@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEDEAO analyse du paludisme</title>
+
+    <style>
+        #titre {
+            background-color: rgb(0, 0, 43);
+            height: 100px;
+            border-radius: 10px;
+        }
+        
+        #titre h3 {
+            color: white;
+            text-align: center;
+            font-family: cursive;
+        }
+        
+        #texte {
+            float: right;
+            margin-top: 10px;
+            margin-right: 8%;
+            background-color: white;
+        }
+        
+        #navigation {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+        
+        #navigation li {
+            display: inline;
+            margin-right: 15px;
+            background: white;
+        }
+        
+        #navigation li a {
+            padding: 4px 20px;
+            background: white;
+            color: rgb(0, 0, 43);
+            border-radius: 5px;
+            font-family: fantasy;
+            line-height: 1em;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        #courbe {
+            background: rgb(0, 0, 43);
+        }
+        
+        FORM {
+            position: absolute;
+            right: 200px;
+            top: 200px;
+        }
+        
+        SELECT {
+            width: 100px;
+            height: 30px;
+        }
+        
+        .tooltip {
+            position: absolute;
+            opacity: 0.8;
+            z-index: 1000;
+            text-align: center;
+            border-radius: 4px;
+            -moz-border-radius: 4px;
+            -webkit-border-radius: 4px;
+            padding: 8px;
+            color: #fff;
+            background-color: black;
+            font: 16px sans serif;
+            max-width: 300px;
+        }
+        
+        .bar {
+            fill: rgb(255, 149, 149);
+        }
+        
+        .bar:hover {
+            fill: rgb(126, 10, 16);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="titre">
+        <h3>Visualisation des cas de Paludisme dans la Zone CEDEAO</h3>
+        <nav>
+            <ul id="navigation">
+                <li><a href="../index.html" title="La page d'accueil">Accueil</a></li>
+                <li><a href="http://data.un.org/Data.aspx?d=WHO&f=MEASURE_CODE%3aWHS3_48" title="voir la source de données">Données</a></li>
+                <li><a href="article.html" title="voir l'article">Article</a></li>
+                <li><a href="carte.html" title="visualiser la carte de la CEDEAO">Carte Map</a></li>
+                <li><a href="#" title="visualiser au cours de années" style="background:red;color:white;">Autre visualisation</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div id="courbe" style="margin-top:10px;">
+        <FORM NAME="pays">
+            <SELECT NAME="selection" onChange="rediriger()">
+            <OPTION VALUE="#">2008
+            <OPTION VALUE="2009.html">2009
+            <OPTION VALUE="2010.html">2010
+            <OPTION VALUE="2011.html">2011
+            <OPTION VALUE="2012.html">2012 
+            <OPTION VALUE="2000.html">2000
+            <OPTION VALUE="2001.html">2001
+            <OPTION VALUE="2002.html">2002
+            <OPTION VALUE="2003.html">2003
+            <OPTION VALUE="2004.html">2004
+            <OPTION VALUE="2005.html">2005
+            <OPTION VALUE="2006.html">2006
+            <OPTION VALUE="2007.html">2007
+            
+</SELECT>
+        </FORM>
+    </div>
+    <footer style="background-color:rgb(0,0,43);color:darkgray; height:120px;margin-top:5px;">
+        <p style="margin-left:40px ;"> &COPY;Copyright 2020 Tous les droits réservés. </p>
+        <label style="float:right; margin-right:50px ;">
+            Auteurs:</br>
+            Johana Binta Vitale FAYE</br>
+            Almamy Youssouf LY</br>
+            Coumba SY </label>
+    </footer>
+    <script src="d3.js"></script>
+
+    <script>
+        function rediriger() {
+            i = document.pays.selection.selectedIndex;
+            if (i == 0) return;
+            lien = document.pays.selection.options[i].value;
+            parent.location.href = lien;
+        }
+    </script>
+    <script>
+        var body = d3.select("#courbe");
+        body.append("h2")
+            .style("color", "white")
+            .style("text-align", "center")
+            .text("Nombre de Cas confirmés en 2008");
+
+        //Parametrage des dimensions
+        var margin = {
+                top: 20,
+                right: 500,
+                bottom: 90,
+                left: 120
+            },
+            width = 600,
+            height = 400;
+
+        //Mise en place du cadre de dessin
+        var svg = d3.select("#courbe").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "." + margin.top + ")");
+
+
+
+        const div = d3.select("#courbe").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+        //chargement des données
+        var year = [{
+            "Country": "Burkina Fasso",
+            "Value": 36514
+        }, {
+            "Country": "Cap-Vert",
+            "Value": 16
+        }, {
+            "Country": "Côte d'Ivoire",
+            "Value": 3527
+        }, {
+            "Country": "Gambie",
+            "Value": 39164
+        }, {
+            "Country": "Ghana",
+            "Value": 1094483
+        }, {
+            "Country": "Guinée",
+            "Value": 33405
+        }, {
+            "Country": "Guinée-Bissau",
+            "Value": 11299
+        }, {
+            "Country": "Liberia",
+            "Value": 606952
+        }, {
+            "Country": "Niger",
+            "Value": 496858
+        }, {
+            "Country": "Nigéria",
+            "Value": 143079
+        }, {
+            "Country": "Sénégal",
+            "Value": 241926
+        }, {
+            "Country": "Sierra Leone",
+            "Value": 154459
+        }, {
+            "Country": "Togo",
+            "Value": 344862
+        }];
+
+        //Mise en place des axes
+        var x = d3.scale.ordinal()
+            .rangeRoundBands([0, width], 0.25);
+
+
+        var y = d3.scale.linear()
+            .range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left")
+            .ticks(10);
+
+        year.forEach(function(d) {
+            d.Country = d.Country;
+            d.Value = +d.Value;
+        });
+
+        x.domain(year.map(function(d) {
+            return d.Country;
+        }));
+        y.domain([0, d3.max(year, function(d) {
+            return d.Value;
+        })]);
+
+        svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis.tickSize(0))
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .style("font-size", "14px")
+            .style("fill", "white")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-45)");
+
+
+        svg.append("g")
+            .call(yAxis.ticks(10))
+            .style("font-size", "14px")
+            .style("fill", "white");
+
+        svg.append('text')
+            .attr('x', -350)
+            .attr('y', -90)
+            .attr('transform', 'rotate(-90)')
+            .attr('text-anchor', 'middle')
+            .style("fill", "white")
+            .text('Nombre de CAS confirmés')
+
+        svg.append('text')
+            .attr('x', 300)
+            .attr('y', 500)
+            .attr('text-anchor', 'middle')
+            .style("fill", "white")
+            .text('les Pays de la CEDEAO')
+
+
+        //Representation des données en bande
+        var group = svg.append("g");
+        group.selectAll("bar")
+            .data(year)
+            .enter()
+            .append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) {
+                return x(d.Country);
+            })
+            .attr("width", x.rangeBand())
+            .attr("y", function(d) {
+                return y(d.Value);
+            })
+            .attr("height", function(d) {
+                return height - y(d.Value);
+            })
+            .on("mouseover", function(d) {
+                div.transition()
+                    .duration(300)
+                    .style("opacity", .9);
+                div.html("Pays: " + d.Country + "</br>" + "Nombre de cas: " + d.Value)
+                    .style("left", (d3.event.pageX + 10) + "px")
+                    .style("top", (d3.event.pageY - 50) + "px");
+            })
+            .on("mouseout", function(d) {
+                div.transition()
+                    .duration(600)
+                    .style("opacity", 0);
+
+            });
+    </script>
+
+</body>
+
+</html>
