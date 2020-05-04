@@ -1,15 +1,30 @@
-<!-- Code from d3-graph-gallery.com -->
 <!DOCTYPE html>
 <meta charset="utf-8">
-<link rel="stylesheet" href="../css/bootstrap.css" type="text/css">
-<link rel="stylesheet" href="../css/style.css" type="text/css">
+<head>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="css/style.css" type="text/css"> 
+<style>
+    .hidden {
+        display: none;
+    }
+  div.tooltip {
+        color:gainsboro;
+        background-color:black;
+        padding: .5em;
+        text-shadow: #f5f5f5 0 1px 0;
+        border-radius: 2px;
+        opacity: 0.9;
+        position: absolute;
+    }
+
+</style>
+<!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 </head>
-
 <body>
-    <div id="titre">
+    <div id = "titre">
         <h3>Visualisation des cas de Paludisme dans la Zone CEDEAO</h3>
         <nav>
             <ul id="navigation">
@@ -21,88 +36,97 @@
             </ul>
         </nav>
     </div>
-
     <!-- Create an element where the map will take place -->
-    <svg id="my_dataviz" width="1210" height="800" style="background-color:rgb(0,0,43);margin-left:5px;margin-top:5px;margin-right:5px;"></svg>
-    <footer style="background-color:rgb(0,0,43);color:darkgray; height:120px;margin-top:5px;">
-        <p style="margin-left:40px ;"> &COPY;Copyright 2020 Tous les droits réservés. </p>
+    <marquee style="background-color:gainsboro;height:30px;"><label>Survoler la carte pour visualiser les différentes régions de la CEDEAO!</label></marquee>
+    <svg id="my_dataviz" width="1290" height="750" style="background-color:gainsboro;" >
+    
+    </svg>
+    
+    <footer style="background-color:rgb(0,0,43);color:darkgray; height:120px;margin-top:0px;">
+        <p style="margin-left:40px ;"> &COPY;Copyright 2020 Tous droits réservés. </p>
         <label style="float:right; margin-right:50px ;">
             Auteurs:</br>
             Johana Binta Vitale FAYE</br>
             Almamy Youssouf LY</br>
             Coumba SY </label>
     </footer>
-    <script>
-        // The svg
-        var svg = d3.select("svg"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
 
-        // Map and projection
-        var path = d3.geoPath();
-        var projection = d3.geoMercator()
-            .scale(width - 100)
-            .center([0, 20])
-            .translate([width - 700, height - 600]);
+<script>
 
-        // Data and color scale
-        var data = d3.map();
-        var colorScale = d3.scaleThreshold()
-            .domain([100000, 1000000, 10000000, 30000000, 100000000, 500000000])
-            .range(d3.schemeBlues[7]);
+// The svg
+var svg = d3.select("svg"),
+    width = +svg.attr("width"),
+    height = +svg.attr("height");
+    var tooltip = d3.select('body').append('div')
+    .attr('class', 'hidden tooltip');
+// Map and projection
+var projection = d3.geoNaturalEarth()
+    .scale(width-100)
+    .center([0,0])
+    .translate([width-600, height-200])
 
-        // Load external data and boot
-        d3.queue()
-            .defer(d3.json, "../data/cedeao.json")
-            .defer(d3.csv, "../data/cedeao12.csv", function(d) {
-                data.set(d.Country, +d.Value);
+// Load external data and boot
+d3.json("data/cedeao.json", function(data){
+
+    // Draw the map
+    
+    var couleur=["blue","orange", "green", "rgb(200,23,0)","yellow","red","gray", "rgb(128,0,0)", "rgb(0,200,10)","rgb(0,0,100)", "rgb(100,10,20)","rgb(150,10,100)","rgb(0,100,240)","rgb(120,100,210)"];
+    svg.append("g")
+        .selectAll("path")
+        .data(data.features)
+        .enter().append("path")
+            .attr("fill", function(d, i){return couleur[i];})
+            .attr("d", d3.geoPath()
+                .projection(projection)
+            )
+            .style("stroke", "#fff")
+            .style("stroke-width", "5px")
+            .on("mouseover",
+            function(d) {
+      d3.selectAll(".Country")
+        .transition()
+        .duration(200)
+        .style("opacity", .5)
+      d3.select(this)
+        .transition()
+        .duration(200)
+        .style("opacity", 1)
+        .style("stroke", "black")
+        .style("stroke-width", "5px")
+        
+
+       var mouse = d3.mouse(svg.node()).map(function(d) {
+                        return parseInt(d);
+                    });
+
+            
+      
+      tooltip.classed('hidden', false)
+                        .attr('style', 'left:' + (mouse[0] + 5) +
+                                'px; top:' + (mouse[1] - 5) + 'px')
+                        .text( d.properties.name );
+       
             })
-            .await(ready);
 
-        function ready(error, topo) {
-
-            let mouseOver = function(d) {
+            .on("mouseleave",
+            function(d) {
                 d3.selectAll(".Country")
                     .transition()
                     .duration(200)
-                    .style("opacity", .5)
-                d3.select(this)
+                    .style("opacity", .8)
+                    d3.select(this)
                     .transition()
                     .duration(200)
-                    .style("opacity", 1)
-                    .style("stroke", "black")
-                    .style("stroke-width", "5px")
-                    .style("fill", "red")
-
-
-            }
+                    .style("stroke", "white")
+            tooltip.classed('hidden', true)
+            });
+            
 
 
 
-            // Draw the map
-            svg.append("g")
-                .selectAll("path")
-                .data(topo.features)
-                .enter()
-                .append("path")
-                // draw each country
-                .attr("d", d3.geoPath()
-                    .projection(projection)
-                )
-                // set the color of each country
-                .attr("fill", function(d) {
-                    d.total = data.get(d.Country) || 0;
-                    return colorScale(d.total);
-                })
-                .style("stroke", "transparent")
-                .attr("class", function(d) {
-                    return "Country"
-                })
-                .style("opacity", .8)
-                .on("mouseover", mouseOver)
-                .on("mouseleave", mouseLeave)
-        }
-    </script>
+                 
+    })
+  
+
+</script>
 </body>
-
-</html>
