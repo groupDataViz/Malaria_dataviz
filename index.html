@@ -1,236 +1,93 @@
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/d3.js"></script>
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.slidertron-1.3.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" />
+<link href="CSS/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+<style>
+	body{
+        background-image: url(images/back.jpg);
+    background-repeat: no-repeat;
+    background-attachment:fixed;
+    background-size:cover;
+	}
+	
+	</style>
 
 </head>
-<style>
-    #image,
-    #courbe {
-        display: inline-block;
-    }
-</style>
-
 <body>
+<div id="header-wrapper" style="background-color:blueviolet;">
+	<div id="header" class="container">
+		<div id="logo">
+			<h3><a href="#">Paludisme</a></h3>
+		</div>
+		<div id="menu">
+			<ul>
+				<li class="icon icon-ok current_page_item"><a href="#" accesskey="1" title="">Accueil</a></li>
+				<li><a href="pages/données.html" accesskey="2" title="">Données</a></li>
+				<li ><a href="pages/viz.html" accesskey="3" title="">Visualisation par Pays</a></li>
+				<li ><a href="pages/2000.html" accesskey="6" title="">Visualisation par Année</a></li>
+				<li ><a href="pages/article.html" accesskey="4" title="">Article</a></li>
+				<li ><a href="https://github.com/groupDataViz/Projet-Visualisation-int-ractive-de-donn-es/wiki" accesskey="5" title="">Cahier d'avancement</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
 
-    <div id="titre">
-        <h3>Visualisation des cas de Paludisme dans la Zone CEDEAO</h3>
-        <nav>
-            <ul id="navigation">
-                <li><a href="#" title="La page d'accueil" style="background:red;color:white;">Accueil</a></li>
-                <li><a href="http://data.un.org/Data.aspx?d=WHO&f=MEASURE_CODE%3aWHS3_48" title="voir la source de données">Données</a></li>
-                <li><a href="pages/article.html" title="voir l'article">Article</a></li>
-                <li><a href="pages/carte.html" title="visualiser la carte de la CEDEAO">Carte Map</a></li>
-                <li><a href="pages/2000.html" title="visualiser au cours de années">Autre visualisation</a></li>
-            </ul>
-        </nav>
-    </div>
+		<!-- ****************************************************************************************************************** -->
 
-    <form style="background-color:gray;margin-top:5px;margin-bottom:0px;">
-        <label style="color:white;">Selectionner un pays:</label>
-        <select id="choix" onchange="afficher()">
-        <option>Choisir un pays</option>
-        <option>Bénin</option>
-        <option>Burkina Faso</option>
-        <option>Cap-Vert</option>
-        <option>Côte-d'Ivoire</option>
-        <option>Gambie</option>
-        <option>Ghana</option>
-        <option>Guinée-Bissau</option>
-        <option>Guinée</option>
-        <option>Liberia</option>
-        <option>Mali</option>
-        <option>Niger</option>
-        <option>Nigeria</option>
-        <option>Senegal</option>
-        <option>Sierra_Leone</option>
-        <option>Togo</option>
-        </select>
-    </form>
-    <div id="courbe" style="width:650px;height:500px;margin-top:0px;
-      background-color:rgb(0,0,43)">
-        <marquee><h3 style="color:white;margin-top:10px;">Afficher la visualisation du nombre de cas pour chaque pays</h3></marquee>
-        <svg></svg>
-    </div>
-    <div id="image" style="height:500px;width:30%;float:right;margin-right:5%;">
-        <marquee> <img src="images/cedeao.png" alt="la CEDEAO" style="width:110px;">
-            <img src="images/palu.jpg" alt="" style="float:right;margin-right:10%;width:200px;">
-        </marquee>
+			<div id="slider">
+				<a href="#" class="button previous-button"><span class="icon icon-double-angle-left"></span></a>
+				<a href="#" class="button next-button"><span class="icon icon-double-angle-right"></span></a>
+				<div class="viewer">
+					<div class="reel">
+						<div class="slide">
+							<a class="link" href="#"></a>
+							<img src="images/1.png" alt="" style ="width:850px;height:500px;margin-left:72px;"/>
+						</div>
+						<div class="slide">
+							<a class="link" href="#"></a>
+							<img src="images/2.png" alt="" style ="width:850px;height:500px;margin-left:72px;" />
+						</div>
+						<div class="slide">
+							<a class="link" href="#"></a>
+							<img src="images/3.png" alt="" style ="width:850px;height:500px;margin-left:72px;"/>
+						</div>
+						<div class="slide">
+							<a class="link" href="#"></a>
+							<img src="images/4.png" alt="" style ="width:850px;height:500px;margin-left:72px;"/>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<script type="text/javascript">
+				$('#slider').slidertron({
+					viewerSelector: '.viewer',
+					reelSelector: '.viewer .reel',
+					slidesSelector: '.viewer .reel .slide',
+					advanceDelay: 3000,
+					speed: 'slow',
+					navPreviousSelector: '.previous-button',
+					navNextSelector: '.next-button',
+					slideLinkSelector: '.link'
+				});
+			</script>
 
-        <h3 style="text-align:center;color:white;font-family:cursive; background-color:rgb(0,0,43)">Motivation</h3>
-        <label style="color:rgb(0,0,43); font-size:17px;">
-    Dans le cadre de notre formation en Master 1 Sciences de données et Applications,
-            il nous a été demandé de faire la visualisation sur un thème au choix dans la
-            zone CEDEAO.</br>
-            Vu la présence du Paludisme en Afrique, nous avons choisi d'étudier ce fléau en visualisant le nombre de
-            cas confirmés dans la zone CEDEAO.</br>
-            Ainsi ce travail a été effectué par un groupe d'étudiants sous la direction de notre Professeur 
-            DR Mamadou Bousso.
-   </label>
-    </div>
-    <footer style="background-color:rgb(0,0,43);color:darkgray; height:110px;margin-top:5px;">
-        <p style="margin-left:40px ;"> &COPY;Copyright 2020 Tous les droits réservés. </p>
-        <label style="float:right;margin-right:50px ;">
-            Auteurs:</br>
-            Johana Binta Vitale FAYE</br>
-            Almamy Youssouf LY</br>
-            Coumba SY </label>
-    </footer>
+		<!-- ****************************************************************************************************************** -->
 
 
 
-
-    <script>
-        function afficher() {
-            var dessin = d3.select("#courbe");
-            var precedent = dessin.selectAll('*');
-            precedent.remove();
-
-            var margin = {
-                    top: 20,
-                    right: 20,
-                    bottom: 100,
-                    left: 70
-                },
-                width = 600 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
-
-            //AXES
-            var x = d3.scaleLinear()
-                .range([0, width]);
-            var y = d3.scaleLinear()
-                .range([height, 0]);
-
-            //Ligne
-            var valueLine = d3.line()
-                .x(function(d) {
-                    return x(d.Year);
-                })
-                .y(function(d) {
-                    return y(d.Value);
-                })
-                //SVG
-
-            var svg = d3.select("#courbe").append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-            // chargement des données
-
-            var nomDonnee = document.getElementById('choix').selectedOptions[0].text;
-            var donnee = 'data/' + nomDonnee + '.csv';
-            d3.csv(donnee).then(function(data) {
-
-
-                data.forEach(function(d) {
-                        d.Year = d.Year;
-                        d.Value = +d.Value;
-                    })
-                    //données des axes
-                x.domain([2000, d3.max(data, function(d) {
-                    return d.Year;
-                })]);
-
-
-
-                y.domain([0, d3.max(data, function(d) {
-                    return d.Value;
-                })]);
-
-
-                //courbe
-                svg.append("path")
-                    .attr("class", "line")
-                    .attr("d", valueLine(data));
-                //X Axis
-                svg.append("g")
-                    .attr("transform", "translate(0," + height + ")")
-                    .call(d3.axisBottom(x).tickFormat(function(d, i) {
-                        return tickLabels[i]
-                    }))
-                    .style("fill", "white")
-                    .style('font-size', '14px')
-                    .selectAll('text')
-                    .attr('fill', 'white')
-
-
-
-                ;
-                //Y Axis
-                svg.append("g")
-                    .call(d3.axisLeft(y))
-                    .style("fill", "white")
-                    .style('font-size', '14px')
-                    .selectAll('text')
-                    .attr('fill', "white");
-
-                svg.selectAll('circle')
-                    .data(data)
-                    .enter()
-                    .append('circle')
-                    .attr('r', 6)
-                    .attr('cx', function(d) {
-                        return x(d.Year)
-                    })
-                    .attr('cy', function(d) {
-                        return y(d.Value)
-                    })
-                    .attr('cursor', 'pointer')
-                    .attr('fill', 'rgb(147,126,30)')
-                    .on('mouseover', function(d, i) {
-                        div.transition()
-                            .duration(200)
-                            .style('opacity', 0.9)
-                        div.html('Nombre de Cas : ' + d.Value + '<br/>' + "Année: " + d.Year)
-                            .style('left', (d3.event.pageX) + "px")
-                            .style('top', (d3.event.pageY - 28) + "px")
-                    })
-
-                .on('mouseout', function(d) {
-                    div.transition()
-                        .duration(500)
-                        .style('opacity', 0)
-                })
-
-                let div = d3.select('body').append('div')
-                    .attr('class', 'tooltip')
-                    .style('opacity', 0);
-
-
-
-            });
-
-
-            let tickLabels = [
-                '2000',
-                '2001',
-                '2002',
-                '2003',
-                '2004',
-                '2005',
-                '2006',
-                '2007',
-                '2008',
-                '2009',
-                '2010',
-                '2011',
-                '2012',
-
-            ]
-
-
-        }
-    </script>
-
-
-
+<div id="copyright" class="container">
+	<p>&copy; Tous droits réservés.</p>
+</div>
 </body>
-
-
 </html>
