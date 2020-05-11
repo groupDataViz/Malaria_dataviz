@@ -1,95 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.css" type="text/css">
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
-    <title>CEDEAO anlyse du paludisme</title>
-    <style>
-        body {
-            background-color: white;
-        }
-        
-        h1 {
-            text-align: center;
-            color: darkblue;
-        }
-        
-        h2 {
-            color: brown;
-        }
-        
-        #palu {
-            text-align: center;
-        }
-        
-        #partie1 {
-            position: absolute;
-            left: 200px;
-            top: 100px;
-            right: 200px;
-        }
-    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.slidertron-1.3.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800" rel="stylesheet" />
+<link href="../CSS/default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+
+<style>
+body{
+    background-color:white;
+}
+  
+    
+    h2 {
+        color: blueviolet;
+        font-size:25px;
+        font-family:cursive;
+    }
+    
+    #partie1 {
+        background-color: white;
+        margin-left: 150px;
+        margin-top: 80px;
+        margin-right: 150px;
+    }
+    p{
+        font-family:arial;
+        font-size:16px;
+    }
+</style>
 </head>
-
 <body>
-    <div id="titre">
-        <h3>Visualisation des cas de Paludisme dans la Zone CEDEAO</h3>
-        <nav>
-            <ul id="navigation">
-                <li><a href="../index.html" title="La page d'accueil">Accueil</a></li>
-                <li><a href="http://data.un.org/Data.aspx?d=WHO&f=MEASURE_CODE%3aWHS3_48" title="voir la source de données">Données</a></li>
-                <li><a href="#" title="voir l'article" style="background:red; color:white;">Article</a></li>
-                <li><a href="carte.html" title="visualiser la carte de la CEDEAO">Carte Map</a></li>
-                <li><a href="2000.html" title="visualiser au cours des années">Autre visualisation</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div id="partie1">
+<div id="header-wrapper"  style="background-color:blueviolet;">
+	<div id="header" class="container">
+		<div id="logo">
+			<h3><a href="#">Paludisme</a></h3>
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a href="../index.html" accesskey="1" title="">Accueil</a></li>
+				<li class=""><a href="données.html" accesskey="2" title="">données</a></li>
+                <li class=""><a href="viz.html" accesskey="3" title="">Visualisation par Pays</a></li>
+                <li class=""><a href="2000.html" accesskey="6" title="">Visualisation par Année</a></li>
+				<li class="icon icon-ok current_page_item"><a href="#" accesskey="4" title="">Article</a></li>
+				<li class=""><a href="https://github.com/groupDataViz/Projet-Visualisation-int-ractive-de-donn-es/wiki" accesskey="5" title="">Cahier d'avancement</a></li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
 
-        <b><a href="../Article.pdf"> <h1> Télécharger l'Article complet au format Pdf </h1></a></b>
-        <div>
-            <h2 id="palu">````````````LE PALUDISME````````</h2>
+<div id="partie1">
 
-            <h2>Epidémiologie </h2>
-            <p>Le paludisme touche une centaine de pays dans le monde, particulièrement les zones tropicales défavorisées d’Afrique, d’Asie et d’Amérique Latine. L’Afrique est, de loin, le continent le plus touché avec 90% des cas de paludisme recensés dans
-                ses zones tropicales. Des épidémies peuvent survenir lors de mouvements de populations peu exposées au paludisme vers des zones hautement endémiques.</p>
-            <p>L’Europe connaît des cas de paludisme dits d’importation. En France, en 2011, 3560 cas d’importation ont été rapportés (source InVS).</p>
-            <h2>Définition du mot <em>PALUDISME</em> </h2>
+    <b><a href="../Article.pdf" style="margin-left:30%;">cliquez pour télécharger l'Article complet au format Pdf</a></b>
+    <div>
 
-            <p> <b> Le paludisme est une maladie infectieuse potentiellement mortelle
-              due à plusieurs espèces de parasites appartenant au genre
-                         Plasmodium.</b> Le parasite est transmis à l’homme par la piqûre de moustiques infectés. Ces moustiques, « vecteurs » du paludisme, appartiennent tous au genre Anopheles.</p>
-            <p> Selon l’<b>OMS</b>, cette maladie cause aux alentours d’un million de victimes par an dans le monde. Environ 40% de la population mondiale est exposée à la maladie et 500 millions de cas cliniques sont observés chaque année. La situation est
-                d’autant plus préoccupante que depuis plusieurs années les parasites développent des résistances aux molécules antipaludiques et les moustiques craignent de moins en moins les insecticides. Aujourd’hui, aucun vaccin n’est disponible.</p>
-            <h2>les symptômes du paludisme</h2>
-            <p>Les manifestations cliniques du paludisme sont très diverses. Le paludisme débute par une fièvre 10 à 15 jours après l’infection, qui peut s’accompagner - ou non - de maux de tête, de douleurs musculaires, d’un affaiblissement, de vomissements,
-                de diarrhées, de toux. Des cycles typiques alternant fièvre, tremblements avec sueurs froides et transpiration intense, peuvent alors survenir : c’est " l’accès palustre". La périodicité de ces cycles dépend de l’espèce de parasite en
-                cause, et coïncide avec la multiplication des parasites et l’éclatement des globules rouges, qui conduit également à l’anémie. Le paludisme engendré par P. falciparum peut être fatal s’il n’est pas traité. Dans certains cas, les globules
-                rouges infectés peuvent obstruer les vaisseaux sanguins irriguant le cerveau : c’est le neuropaludisme, souvent mortel.</p>
-            </br>
-            </br>
-            <b><header style="color:brown;">ILLUSTRATION:LES SIX CHOSES IMPORTANTES DU PALUDISME</header></b>
-            <img src="../images/paludisme.png">
-
+    </br><h2>Epidémiologie </h2></br>
+        <p>Le paludisme touche une centaine de pays dans le monde, particulièrement les zones tropicales défavorisées d’Afrique, d’Asie et d’Amérique Latine. L’Afrique est, de loin, le continent le plus touché avec 90% des cas de paludisme recensés dans
+            ses zones tropicales. Des épidémies peuvent survenir lors de mouvements de populations peu exposées au paludisme vers des zones hautement endémiques.</p>
+        <p>L’Europe connaît des cas de paludisme dits d’importation. En France, en 2011, 3560 cas d’importation ont été rapportés (source InVS).</p>
         </div>
+        <div>
+        </br><h2>Définition du mot <em>PALUDISME</em> </h2></br>
+
+        <p> <b> Le paludisme est une maladie infectieuse potentiellement mortelle
+          due à plusieurs espèces de parasites appartenant au genre
+                     Plasmodium.</b> Le parasite est transmis à l’homme par la piqûre de moustiques infectés. Ces moustiques, « vecteurs » du paludisme, appartiennent tous au genre Anopheles.</p>
+        <p> Selon l’<b>OMS</b>, cette maladie cause aux alentours d’un million de victimes par an dans le monde. Environ 40% de la population mondiale est exposée à la maladie et 500 millions de cas cliniques sont observés chaque année. La situation est
+            d’autant plus préoccupante que depuis plusieurs années les parasites développent des résistances aux molécules antipaludiques et les moustiques craignent de moins en moins les insecticides. Aujourd’hui, aucun vaccin n’est disponible.</p>
+        </br><h2>les symptômes du paludisme</h2></br>
+        <p>Les manifestations cliniques du paludisme sont très diverses. Le paludisme débute par une fièvre 10 à 15 jours après l’infection, qui peut s’accompagner - ou non - de maux de tête, de douleurs musculaires, d’un affaiblissement, de vomissements,
+            de diarrhées, de toux. Des cycles typiques alternant fièvre, tremblements avec sueurs froides et transpiration intense, peuvent alors survenir : c’est " l’accès palustre". La périodicité de ces cycles dépend de l’espèce de parasite en
+            cause, et coïncide avec la multiplication des parasites et l’éclatement des globules rouges, qui conduit également à l’anémie. Le paludisme engendré par P. falciparum peut être fatal s’il n’est pas traité. Dans certains cas, les globules
+            rouges infectés peuvent obstruer les vaisseaux sanguins irriguant le cerveau : c’est le neuropaludisme, souvent mortel.</p>
         </br>
         </br>
-        <div>
-            <h1>LE PALUDISME AU SENEGAL</h1>
-            <p>Au Sénégal, « la transmission du paludisme est toujours étroitement liée au rythme des pluies et s’effectue en général au cours de la saison des pluies et au début de la saison sèche », explique le PLNP dans le « le Plan stratégique national
-                2016-2020 ».</p>
-            <p>« En général, les pluies commencent en juin et juillet », plus tôt dans le Sud que dans le Nord, et elles « se poursuivent jusqu’en octobre. Le pic de transmission (les mois durant lesquels la majorité des cas sont diagnostiqués) se trouve
-                en octobre et en novembre ».</p>
-            <p>De même source, le fardeau de cette maladie « a connu une régression significative de plus de 50 % entre 2009 et 2015. En effet, la prévalence parasitaire est passée de 3 % à 1,2 % et la mortalité toutes causes confondues est passée de 72
-                pour mille naissances vivantes à 33 pour mille naissances vivantes chez les moins de 5 ans entre 2009 et 2014 », est-il expliqué dans le document.</p>
-        </div>
+    </br><h2 style="color:blueviolet;">Les six choses importantes du Paludisme</h2></br>
+        <img src="../images/paludisme.png">
 
     </div>
+    </br>
+    </br>
+    <div>
+    </br><h2>LE Paludisme au Sénégal</h2></br>
+        <p>Au Sénégal, « la transmission du paludisme est toujours étroitement liée au rythme des pluies et s’effectue en général au cours de la saison des pluies et au début de la saison sèche », explique le PLNP dans le « le Plan stratégique national
+            2016-2020 ».</p>
+        <p>« En général, les pluies commencent en juin et juillet », plus tôt dans le Sud que dans le Nord, et elles « se poursuivent jusqu’en octobre. Le pic de transmission (les mois durant lesquels la majorité des cas sont diagnostiqués) se trouve
+            en octobre et en novembre ».</p>
+        <p>De même source, le fardeau de cette maladie « a connu une régression significative de plus de 50 % entre 2009 et 2015. En effet, la prévalence parasitaire est passée de 3 % à 1,2 % et la mortalité toutes causes confondues est passée de 72
+            pour mille naissances vivantes à 33 pour mille naissances vivantes chez les moins de 5 ans entre 2009 et 2014 », est-il expliqué dans le document.</p>
+    </div>
 
+</div>
+
+<div id="copyright" class="container">
+	<p>&copy; Tous droits réservés.</p>
+	<p> Johana Binta Vitale FAYE</p>
+    <p>Almamy Yousouf Ly </p>
+    <p>Coumba SY </p>
+</div>
 </body>
-
-
 </html>
